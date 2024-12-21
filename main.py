@@ -85,7 +85,7 @@ def get_author_books(message):
     books = [book for book in data["docs"]]
     respond = ""
     for i in range(len(books)):
-        respond += f"{i+1}. {books[i]["title"]} {books[i]["rating_average"]}\n"
+        respond += f"{i+1}. {books[i]["title"]} {books[i].get("ratings_average", 0)}\n"
 
     tg_bot.send_message(message.chat.id,
     (f"У автора {author} есть следующие книги:\n\n"
@@ -116,7 +116,7 @@ def get_books(message):
     books = [book for book in data["docs"]]
     respond = ""
     for i in range(len(books)):
-        respond += f"{i+1}. {books[i]["title"]} {books[i]["ratings_average"]}\n"
+        respond += f"{i+1}. {books[i]["title"]} {books[i].get("ratings_average", 0)}\n"
 
     tg_bot.send_message(message.chat.id,
     (f"Найдены следующие книги:\n\n"
