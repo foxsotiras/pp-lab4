@@ -49,7 +49,8 @@ def help(message):
             message.chat.id,
             (f"Название: {book["title"]}\n"
             f"Авторы: {', '.join([author["name"] for author in book["authors"]])}\n"
-            f"Дата публикация: {book["publish_date"]}"))
+            f"Дата публикация: {book["publish_date"]}"
+            f"Рейтинг: {book["publish_date"]}"))
     except IndexError:
         tg_bot.send_message(
             message.chat.id,
@@ -81,10 +82,10 @@ def get_author_books(message):
             "Этот автор ничего не написал :(")
         return
 
-    books = [book["title"] for book in data["docs"]]
+    books = [book for book in data["docs"]]
     respond = ""
     for i in range(len(books)):
-        respond += f"{i+1}. {books[i]}\n"
+        respond += f"{i+1}. {books[i]["title"]} {books[i]["rating_average"]}\n"
 
     tg_bot.send_message(message.chat.id,
     (f"У автора {author} есть следующие книги:\n\n"
@@ -112,10 +113,10 @@ def get_books(message):
             "Не найдено книг с таким названием :(")
         return
 
-    books = [book["title"] for book in data["docs"]]
+    books = [book for book in data["docs"]]
     respond = ""
     for i in range(len(books)):
-        respond += f"{i+1}. {books[i]}\n"
+        respond += f"{i+1}. {books[i]["title"]} {books[i]["ratings_average"]}\n"
 
     tg_bot.send_message(message.chat.id,
     (f"Найдены следующие книги:\n\n"
